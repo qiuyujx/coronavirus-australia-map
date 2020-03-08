@@ -1,3 +1,4 @@
+import 'ol/ol.css';
 import Feature from 'ol/Feature';
 import Geolocation from 'ol/Geolocation';
 import Map from 'ol/Map';
