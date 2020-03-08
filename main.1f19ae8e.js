@@ -67387,7 +67387,24 @@ var _proj = require("ol/proj");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Initialise a map view
+/* Helper functions */
+function readTextFile(file) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", file, false);
+
+  rawFile.onreadystatechange = function () {
+    if (rawFile.readyState === 4) {
+      if (rawFile.status === 200 || rawFile.status == 0) {
+        var allText = rawFile.responseText;
+        alert(allText);
+      }
+    }
+  };
+
+  rawFile.send(null);
+} // Initialise a map view
+
+
 var view = new _View.default({
   center: [1602780.550322602, -455617.5544681195],
   zoom: 2
@@ -67406,10 +67423,15 @@ var geolocation = new _Geolocation.default({
   projection: view.getProjection()
 }); // Centralise map based on geolocation
 
+var onChangeOnce = true;
 geolocation.on('change', function () {
-  view = map.getView();
-  view.setCenter(geolocation.getPosition());
-  view.setZoom(10);
+  if (onChangeOnce) {
+    view = map.getView();
+    view.setCenter(geolocation.getPosition());
+    view.setZoom(10);
+  }
+
+  onChangeOnce = false;
 }); // Add outer circle
 
 var accuracyFeature = new _Feature.default();
@@ -67446,6 +67468,8 @@ new _layer.Vector({
 /* Add Confirmed Case Marks */
 
 var confirmedMarks = new Array();
+var cases = readTextFile('./README.md');
+console.log(cases);
 confirmedMarks.push(new _Feature.default(new _Point.default((0, _proj.fromLonLat)([145.128093, -37.627633]))));
 var source = new _source.Vector({
   features: confirmedMarks
@@ -67515,7 +67539,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50276" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56869" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
