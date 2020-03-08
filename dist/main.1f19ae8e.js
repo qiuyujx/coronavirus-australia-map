@@ -67312,7 +67312,6 @@ var _proj = require("ol/proj");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import 'ol/ol.css';
 // Initialise a map view
 var view = new _View.default({
   center: [1602780.550322602, -455617.5544681195],
